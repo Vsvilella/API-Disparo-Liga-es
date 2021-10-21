@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Discador AutomÃ¡tico</title>
+</head>
+<body>
+    <input type="file" id="arquivo">
+    <button type="button" onclick="dispararLigacao()">Ligar</button>
+<script>
+
+    function dispararLigacao() {
+        let result = {};
+        var reader = new FileReader();
+        reader.addEventListener('load', function() {
+            result = this.result.replaceAll("\r\n", ",").split(",")
+            for (let j = 0; j < result.length; j++) {
+                if(result[j] === "") {
+                    result.splice(j, 1)
+                }
+            }
+            for(let i = 0; i < result.length; i++) {
+                var data = JSON.stringify({
+                "caller": "37575001",
+                "called": result[i]
+                });
+
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+
+                xhr.addEventListener("readystatechange", function() {
+                    if(this.readyState === 4) {
+                        console.log(this.responseText);
+                    }
+                });
+
+                xhr.open("POST", "https://api.nvoip.com.br/v2/calls/?napikey=RWZBVUkxMjhYZG1OTFpDNWZlU0gzRkdYSWVsR2RqQUU=");
+                xhr.setRequestHeader("Content-Type", "application/json");
+
+                xhr.send(data);
+            }
+        });
+        reader.readAsText(document.getElementById('arquivo').files[0]);
+    }
+</script>
+
+<!--Embad Webphone-->
+
+<!-- <div id="includedContent" ></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
+    <script>
+            var config = {
+                authorizationUser: '14134',
+                password : '@Nvoip2020',
+            options :{ }
+            };
+            $(function(){
+            $("#includedContent").load("https://s3-sa-east-1.amazonaws.com/nvoipcom/public/webphone/v4/nvoipwebphone.html");});
+    </script> -->
+</body>
+</html>
