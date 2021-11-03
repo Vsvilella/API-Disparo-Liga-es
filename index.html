@@ -23,7 +23,7 @@
             console.log(i - 1 !== result.length)
                 if(i - 1 !== result.length) {
                     var data = JSON.stringify({
-                    "caller": "24163001",
+                    "caller": "68574001",
                     "called": result[i]
                     });
                     console.log(i)
@@ -37,7 +37,7 @@
                             console.log(this.responseText);
                         }
                     });
-                    xhr.open("POST", "https://api.nvoip.com.br/v2/calls/?napikey=VWdHN2NITDVEbG41UUZubmthZWZhNk5uTkpSUjJWbjI=");
+                    xhr.open("POST", "https://api.nvoip.com.br/v2/calls/?napikey=ZUY0UEZsZ0lEQUVlN0UxRERPV2UxWUpmbEZaUlVMRjk=");
                     xhr.setRequestHeader("Content-Type", "application/json");
                     xhr.send(data);
                     i = i + 1
